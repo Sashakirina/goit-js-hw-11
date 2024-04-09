@@ -3,10 +3,9 @@ import 'izitoast/dist/css/iziToast.min.css';
 import { getImges } from './js/pixabay-api';
 
 const form = document.querySelector('.search-form');
-console.log(form);
-const inputEl = document.querySelector('.search-input');
+
 export const gallery = document.querySelector('.gallery-list');
-const loadingEl = document.querySelector('.loader');
+export const loadingEl = document.querySelector('.loader');
 
 form.addEventListener('submit', handleSubmit);
 
@@ -18,13 +17,11 @@ function handleSubmit(event) {
   loadingEl.classList.add('isactive');
 
   if (!userSearch.length) {
-    {
-      iziToast.error({
-        message: 'Please fill the form!',
-      });
-    }
+    iziToast.error({
+      message: 'Please fill the form!',
+    });
+    loadingEl.classList.remove('isactive');
   } else {
     getImges(userSearch).then(() => form.reset());
   }
-  loadingEl.classList.remove('isactive');
 }
